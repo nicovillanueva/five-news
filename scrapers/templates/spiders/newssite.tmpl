@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+import scrapy
+
+
+class $classname(scrapy.Spider):
+    name = '$name'
+    allowed_domains = ['$domain']
+    start_urls = ['http://$domain']
+
+    def start_requests(self):
+        urls = [
+            '$domain'
+        ]
+        for url in urls:
+            yield scrapy.Request(url=url, callback=self.parse)
+
+
+    def parse(self, response):
+        """
+        @url $domain
+        @returns items 5
+        @scrapes rank text link
+        """
+        yield {
+            "rank": -1,
+            "text": "placeholder",
+            "link": "placeholder"
+        }

@@ -8,7 +8,9 @@
 import scrapy
 
 
-class ScrapersItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class News(scrapy.Item):
+    rank = scrapy.Field()
+    text = scrapy.Field()
+    link = scrapy.Field()
+    # image
+    # weather?

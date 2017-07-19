@@ -1,2 +1,3 @@
 gradle-code/
 venv/
+__pycache__/

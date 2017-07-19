@@ -2,6 +2,7 @@
 import json
 import scrapy
 from scrapy.selector import Selector
+from scrapers.items import News
 
 
 class ClarinSpider(scrapy.Spider):
@@ -27,8 +28,8 @@ class ClarinSpider(scrapy.Spider):
         d = json.loads(response.body.decode().replace('(', '').replace(')', '')).get('data')
         s = Selector(text=d)
         for i, ml in enumerate(s.xpath('//article')[:5]):
-            yield {
-                "rank": ml.xpath('.//div[contains(@class, "number")]/text()').extract_first().strip(),
-                "text": ml.xpath('.//h2/text()').extract_first().strip(),
-                "link": s.xpath('//article/parent::div/@onclick')[i].extract().split('\'')[1]
-            }
+            yield News(
+                rank=ml.xpath('.//div[contains(@class, "number")]/text()').extract_first().strip(),
+                text=ml.xpath('.//h2/text()').extract_first().strip(),
+                link=s.xpath('//article/parent::div/@onclick')[i].extract().split('\'')[1]
+            )

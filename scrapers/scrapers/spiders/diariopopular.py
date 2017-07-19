@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapers.items import News
 
 
 class DiarioPopularSpider(scrapy.Spider):
@@ -23,8 +24,8 @@ class DiarioPopularSpider(scrapy.Spider):
         """
         for i, ml in enumerate(response.xpath("//section[contains(@class, 'article-ranking')]//article")):
             n = ml.xpath('.//a')[1]
-            yield {
-                "rank": i + 1,
-                "text": n.xpath('@alt').extract_first(),
-                "link": n.xpath('@href').extract_first()
-            }
+            yield News(
+                rank=i + 1,
+                text=n.xpath('@alt').extract_first(),
+                link=n.xpath('@href').extract_first()
+            )

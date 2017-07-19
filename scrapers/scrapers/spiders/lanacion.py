@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
+from scrapers.items import News
 
 class LaNacionSpider(scrapy.Spider):
     name = 'lanacion'
@@ -22,8 +22,8 @@ class LaNacionSpider(scrapy.Spider):
         @scrapes rank text link
         """
         for ml in response.xpath('//section[contains(@id, "ranking")]/article'):
-            yield {
-                "rank": ml.xpath(".//span/text()").extract_first(),
-                "text": ml.xpath(".//a/text()").extract_first(),
-                "link": ml.xpath(".//a/@href").extract_first()
-            }
+            yield News(
+                rank=ml.xpath(".//span/text()").extract_first(),
+                text=ml.xpath(".//a/text()").extract_first(),
+                link=ml.xpath(".//a/@href").extract_first()
+            )

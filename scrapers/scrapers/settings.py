@@ -14,9 +14,12 @@ BOT_NAME = 'scrapers'
 SPIDER_MODULES = ['scrapers.spiders']
 NEWSPIDER_MODULE = 'scrapers.spiders'
 
+MONGO_URI='mongodb://localhost:27017'
+MONGO_DATABASE='five-news'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapers (+http://www.yourdomain.com)'
+# ... not
+USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -66,9 +69,9 @@ TEMPLATES_DIR = 'templates'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'scrapers.pipelines.ScrapersPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'scrapers.pipelines.NewsStorePipeline': 0,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapers.items import News
 
 
 class InfobaeSpider(scrapy.Spider):
@@ -23,8 +24,8 @@ class InfobaeSpider(scrapy.Spider):
         """
         tops = response.xpath("//div[contains(@class, 'pb-f-global-most-read')]//aside//header")[:5]
         for rank, ml in enumerate(tops):
-            yield {
-                "rank": rank,
-                "text": ml.css('a::text').extract_first(),
-                "link": ml.xpath('.//a/@href').extract_first()
-            }
+            yield News(
+                rank=rank + 1,
+                text=ml.css('a::text').extract_first(),
+                link=ml.xpath('.//a/@href').extract_first()
+            )
